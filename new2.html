@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+            color: white;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            z-index: 1000;
+        }
+
+        nav a {
+            margin-left: 1.5rem;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #a855f7;
+        }
+
+        section {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        /* .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        } */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .hero-container {
+            display: flex;
+            flex-direction: row;
+            /* Image now on left */
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            width: 100%;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            justify-content: center;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .hero-image img {
+            max-width: 300px;
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 35px rgba(168, 85, 247, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .button {
+            background-color: #9333ea;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background-color: #7e22ce;
+        }
+
+        .projects-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .project-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            width: 250px;
+            height: 250px;
+            background: #1f1f1f;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+        }
+
+        .project-card:hover h3 {
+            color: #a855f7;
+            text-shadow: 0 0 5px #a855f7;
+        }
+
+        .project-card:hover span {
+            color: #60a5fa;
+        }
+
+        /* .project-card span {
+            color: #60a5fa;
+            font-size: 0.9rem;
+        } */
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #888;
+            background: #0d0d0d;
+           
+        }
+        
+        .contact1{
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s;
+        }
+        .contact1:hover{
+            transform: scale(1.05);
+            color: #a855f7;
+            text-shadow: 0 0 5px #a855f7;
+        }
+        .contact2{
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s;
+        }
+        .contact2:hover{
+            transform: scale(1.05);
+            color: #a855f7;
+            text-shadow: 0 0 5px #a855f7;
+        }
+        .contact3{
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s;
+        }
+        .contact3:hover{
+            transform: scale(1.05);
+            color: #a855f7;
+            text-shadow: 0 0 5px #a855f7;
+        }
+        .certificates-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-top: 4rem;
+}
+
+.certificate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.certificate-card {
+    background: linear-gradient(145deg, #1a1a1a, #111);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid #2e2e2e;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    text-align: left;
+    position: relative;
+}
+
+.certificate-card h3 {
+    font-size: 1.2rem;
+    color: #f3f3f3;
+    margin-bottom: 0.5rem;
+}
+
+.certificate-card p {
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.certificate-card a {
+    color: #60a5fa;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.certificate-card a:hover {
+    color: #a855f7;
+}
+
+.certificate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.05);
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>MyPortfolio</h1>
+        <nav>
+            <a href="#about">About me</a>
+            <a href="#projects">Projects</a>
+            <a href="#certificates">Certificates</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-image">
+                <img src="C:\Users\LENOVO\OneDrive\Pictures\PERSONAL DOCUMENTS\passport_sizE.png" alt="Tharshan R" />
+            </div>
+            <div class="hero-text">
+                <h1>Hi, I'm <span style="color: #a855f7">Tharshan R</span></h1>
+                <p>I'm a passionate UI/UX Designer | Web Developer | Python Developer.</p>
+                <button class="button"
+                    onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });">View My
+                    Work</button>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="about">
+        <h2 style="font-size: 2rem; font-weight: bold;">About Me</h2>
+        <p style="max-width: 700px; font-size: 1.25rem; margin: 1rem auto; color: #ccc;">
+            Hi! I'm a passionate UI/UX Designer, Web Developer, and Python enthusiast who loves turning ideas into
+            intuitive,
+            user-friendly digital experiences. With a strong eye for design and a solid foundation in development,
+            I bridge the gap between aesthetics and functionality.
+        </p>
+    </section>
+
+    <section id="projects">
+        <div class="projects-wrapper">
+            <h2 style="font-size: 2rem; font-weight: bold;">Projects</h2>
+            <div class="project-grid">
+
+                <a href="project1.html" target="_blank" class="project-card">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Multiple Form Filler</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">An automated form-filling tool that uses data from an SQL 
+                            database to populate web forms across multiple sites with a user-friendly interface and cross-browser support.
+                        </p>
+                    </div>
+                    <span>View Project →</span>
+                </a>
+
+                <a href="https://yourproject2link.com" target="_blank" class="project-card">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Project 2</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">Brief description of Project 2.
+                        </p>
+                    </div>
+                    <span>View Project →</span>
+                </a>
+
+                <a href="https://yourproject3link.com" target="_blank" class="project-card">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Project 3</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">Brief description of Project 3.
+                        </p>
+                    </div>
+                    <span>View Project →</span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="uiux">
+        <div class="projects-wrapper">
+            <h2 style="font-size: 2rem; font-weight: bold;">UI/UX Designs</h2>
+            <div class="project-grid">
+    
+                <a href="https://www.figma.com/proto/PwCSDHFrHhNjGBM6XsRWKB/new?node-id=0-1&t=tFQQLdA1RlBo28Ll-1" target="_blank" class="project-card">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Login Page Concept</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">
+                            A minimal and clean login screen for a mobile app.
+                        </p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+    
+                <a href="https://yourfigmalink2.com" target="_blank" class="project-card">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">E-Commerce UI</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">
+                            Product listing and shopping cart experience.
+                        </p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+    
+                <a href="https://yourfigmalink3.com" target="_blank" class="project-card">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Dashboard Design</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">
+                            Admin dashboard layout for data insights.
+                        </p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+                <a href="https://yourfigmalink4.com" target="_blank" class="project-card">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Dashboard Design</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">
+                            Admin dashboard layout for data insights.
+                        </p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+    
+            </div>
+        </div>
+    </section>
+
+
+    <section id="certificates">
+        <div class="certificates-wrapper">
+            <h2 style="font-size: 2rem; font-weight: bold;">Certificates</h2>
+            <div class="certificate-grid">
+    
+                <div class="certificate-card">
+                    <h3>Python for Everybody</h3>
+                    <p>Issued by Coursera | 2024</p>
+                    <a href="https://your-certificate-link.com" target="_blank">View Certificate →</a>
+                </div>
+    
+                <div class="certificate-card">
+                    <h3>Responsive Web Design</h3>
+                    <p>Issued by freeCodeCamp | 2023</p>
+                    <a href="https://your-certificate-link.com" target="_blank">View Certificate →</a>
+                </div>
+    
+                <div class="certificate-card">
+                    <h3>UI/UX Design Foundations</h3>
+                    <p>Issued by Google | 2024</p>
+                    <a href="https://your-certificate-link.com" target="_blank">View Certificate →</a>
+                </div>
+                <div class="certificate-card">
+                    <h3>Knowledge Beyond Boundaries</h3>
+                    <p>others </p>
+                    <a href="certificate_beyond.html" target="_blank">View Certificate →</a>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+
+
+   
+    
+    
+    
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p style="margin-bottom: 1rem; color: #ccc;">Let's connect! Reach out through any platform below.</p>
+        <div >
+            <a href="https://github.com" class="contact1"target="_blank"
+                style="margin: 0 1rem; color: #a855f7; text-decoration: none;">GitHub</a>
+            <a href="https://linkedin.com" class="contact2" target="_blank"
+                style="margin: 0 1rem; color: #a855f7; text-decoration: none;">LinkedIn</a>
+            <a href="mailto:t4469860@gmail.com" class="contact3" style="margin: 0 1rem; color: #a855f7; text-decoration: none;">Email</a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Tharshan R. All rights reserved.
+    </footer>
+</body>
+
+</html>
