@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --purple-light: #a855f7;
+            --dark-bg: #0d0d0d;
+            --card-bg: #1f1f1f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: background 0.4s ease-out, backdrop-filter 0.4s ease-out, padding 0.4s ease-out;
+        }
+
+        header.scrolled {
+            background: rgba(13, 13, 13, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+
+        nav a {
+            margin-left: 1.5rem;
+            color: white;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #a855f7, #60a5fa);
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        nav a:hover {
+            color: #a855f7;
+            transform: translateY(-3px);
+            text-shadow: 0 0 8px #a855f7;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+
+        section {
+            padding: 6rem 2rem;
+            text-align: center;
+            background-color: var(--dark-bg);
+            position: relative;
+        }
+
+        .hero {
+            min-height: 100vh;
+            /* Use min-height to prevent content overflow on small screens */
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .hero-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            width: 100%;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            text-align: left;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            max-width: 300px;
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 35px rgba(168, 85, 247, 0.4);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .button {
+            background-color: #9333ea;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .button:hover {
+            background-color: #7e22ce;
+            transform: translateY(-2px);
+        }
+
+        .projects-wrapper,
+        .certificates-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* --- IMPROVED RESPONSIVE GRID --- */
+        /* This new grid layout is responsive by default */
+        .project-grid,
+        .certificate-grid {
+            display: grid;
+            /* This is the magic: it creates as many columns as can fit with a min size of 250px */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            /* Slightly reduced gap */
+            margin-top: 2rem;
+        }
+
+
+        .project-card {
+            /* No longer need a fixed width here because the grid handles it */
+            height: 250px;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-decoration: none;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+        }
+
+        .project-card:hover h3 {
+            color: var(--purple-light);
+            text-shadow: 0 0 5px var(--purple-light);
+        }
+
+        .project-card:hover span {
+            color: #60a5fa;
+        }
+
+        .certificate-card {
+            background: linear-gradient(145deg, #1a1a1a, #111);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid #2e2e2e;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            text-align: left;
+            position: relative;
+            /* No fixed width needed */
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+        }
+
+        .certificate-card h3 {
+            font-size: 1.2rem;
+            color: #f3f3f3;
+            margin-bottom: 0.5rem;
+        }
+
+        .certificate-card p {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .certificate-card a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .certificate-card a:hover {
+            color: var(--purple-light);
+        }
+
+        .skill {
+            width: 120px;
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .skill img,
+        .skill .placeholder {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+        }
+
+        .skill .placeholder {
+            background: linear-gradient(orange, red);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        .skill p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .skill:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.3);
+        }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #888;
+            background: var(--dark-bg);
+            position: relative;
+        }
+
+        /* --- NEW --- Wrapper for the 'top' link */
+        .top-link-wrapper {
+            text-align: center;
+            padding-bottom: 2rem;
+            background-color: var(--dark-bg);
+        }
+
+        .contact1,
+        .contact2,
+        .contact3 {
+            transition: transform 0.4s ease, color 0.4s ease, text-shadow 0.4s;
+        }
+
+        .contact1:hover,
+        .contact2:hover,
+        .contact3:hover {
+            transform: scale(1.05);
+            color: var(--purple-light);
+            text-shadow: 0 0 5px var(--purple-light);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in.fade-out {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* ========================================= */
+        /* ===== RESPONSIVE STYLES (MEDIA QUERY) ===== */
+        /* ========================================= */
+        /* These styles will apply on screens 768px wide or smaller (tablets and phones) */
+
+        @media (max-width: 768px) {
+
+            /* -- Header & Navigation -- */
+            header {
+                flex-direction: column;
+                /* Stack the logo and nav vertically */
+                padding: 1rem;
+            }
+
+            header h1 {
+                margin-bottom: 0.5rem;
+            }
+
+            nav {
+                margin-top: 0.5rem;
+            }
+
+            nav a {
+                margin: 0 0.75rem;
+                /* Adjust horizontal margin for links */
+            }
+
+            /* -- Hero Section -- */
+            .hero {
+                padding-top: 6rem;
+                /* Add padding to not be hidden by the header */
+            }
+
+            .hero-container {
+                /* Stack the image and text on top of each other */
+                flex-direction: column-reverse;
+                /* Puts text above the image, which is better for mobile */
+            }
+
+            .hero-text {
+                text-align: center;
+                /* Center align the hero text */
+                margin-top: 2rem;
+            }
+
+            /* -- Typography -- */
+            .hero h1 {
+                font-size: 2.5rem;
+                /* Make the main heading smaller */
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            /* -- Spacing -- */
+            section {
+                padding: 4rem 1rem;
+                /* Reduce the top/bottom and side padding on sections */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>MyPortfolio</h1>
+        <nav>
+            <a href="#about">About Me</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#uidesign">UI/UX Designs</a>
+            <a href="#marvelousdesigner">Marvelous Designer</a>
+            <a href="#certificates">Certificates</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-image fade-in">
+                <img src="passport_size1.png" alt="Tharshan R" />
+            </div>
+            <div class="hero-text">
+                <h1 class="fade-in" style="transition-delay: 0.2s;">Hi, I'm <span style="color: #a855f7">Tharshan
+                        R</span></h1>
+                <p class="fade-in" style="transition-delay: 0.4s;">I'm a passionate UI/UX Designer | Web Developer |
+                    Python Developer.</p>
+                <button class="button fade-in" style="transition-delay: 0.6s;"
+                    onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });">View My
+                    Work</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="fade-in">
+        <h2 style="font-size: 2rem; font-weight: bold;">About Me</h2>
+        <p style="max-width: 700px; font-size: 1.25rem; margin: 1rem auto; color: #ccc;">
+            I'm Tharshan .R — a 3rd-year AI & Data Science student, passionate UI/UX Designer, Front-End Developer, and
+            Marvelous Designer enthusiast.
+            I'm working towards becoming a skilled AI Automation Engineer, blending creativity and technology to build
+            smart, engaging user experiences.
+        </p>
+    </section>
+
+    <section id="projects">
+        <div class="projects-wrapper fade-in">
+            <h2 style="font-size: 2rem; font-weight: bold;">Projects</h2>
+            <div class="project-grid">
+                <a href="project1.html" target="_blank" class="project-card fade-in">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Multiple Form Filler</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">An automated form-filling tool
+                            that uses data from an SQL database to populate web forms across multiple sites with a
+                            user-friendly interface and cross-browser support.</p>
+                    </div>
+                    <span>View Project →</span>
+                </a>
+                <a href="#" target="_blank" class="project-card fade-in" style="transition-delay: 0.2s;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Project 2</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">coming soon</p>
+                    </div>
+                    <span>View Project →</span>
+                </a>
+                <a href="#" target="_blank" class="project-card fade-in" style="transition-delay: 0.4s;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Project 3</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">coming soon</p>
+                    </div>
+                    <span>View Project →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="projects-wrapper fade-in">
+            <h2 style="font-size: 2rem; font-weight: bold;">Skills </h2>
+            <div class="skills-grid">
+                <div class="skill fade-in"><img
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+                    <p>HTML</p>
+                </div>
+                <div class="skill fade-in" style="transition-delay: 0.1s;"><img
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+                    <p>CSS</p>
+                </div>
+                <div class="skill fade-in" style="transition-delay: 0.2s;"><img
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                        alt="JavaScript">
+                    <p>JavaScript</p>
+                </div>
+                <div class="skill fade-in" style="transition-delay: 0.3s;"><img
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+                    <p>Figma</p>
+                </div>
+                <div class="skill fade-in" style="transition-delay: 0.4s;"><img
+                        src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/canva.svg" alt="Canva"
+                        style="filter: invert(1);">
+                    <p>Canva</p>
+                </div>
+                <div class="skill fade-in" style="transition-delay: 0.5s;"><img
+                        src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                        alt="Python">
+                    <p>Python</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="uidesign">
+        <div class="projects-wrapper fade-in">
+            <h2 style="font-size: 2rem; font-weight: bold;">UI/UX Designs</h2>
+            <div class="project-grid">
+                <a href="/ui_ux_designs/app_designs.html" target="_blank" class="project-card fade-in">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Prototyped Designs</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">A minimal and clean interface for
+                            a mobile and windows apps</p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+                <a href="/ui_ux_designs/tasks_intern.html" target="_blank" class="project-card fade-in"
+                    style="transition-delay: 0.2s;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Intership Tasks </h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">gaining more Knowledge from the
+                            interships.</p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+                <a href="#" target="_blank" class="project-card fade-in" style="transition-delay: 0.4s;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Clients Tasks </h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;"><b>Waiting for
+                                clients</b><br><br>As per the designs charges may vary.</p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+                <a href="#" target="_blank" class="project-card fade-in" style="transition-delay: 0.6s;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">coming soon as possible</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">to be continued...</p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="marvelousdesigner">
+        <div class="projects-wrapper fade-in">
+            <h2 style="font-size: 2rem; font-weight: bold;">Marvelous Designer</h2>
+            <p style="font-size: 1rem; font-weight: medium;"> 3D clothing design and simulation software </p>
+            <div class="project-grid">
+                <a href="marvelousdesignerprojects.html" target="_blank" class="project-card fade-in">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">No Reference Challenges </h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">It helps me to develops my skills
+                            for all environment.</p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+                <a href="#" target="_blank" class="project-card fade-in" style="transition-delay: 0.2s;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Client Tasks </h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;"><b>Waiting for clients</b>
+                            <br><br> For designs charges ₹1000-₹2500 as per the designs.
+                        </p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+                <a href="#" target="_blank" class="project-card fade-in" style="transition-delay: 0.4s;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">Practice</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">coming soon to be continued...
+                        </p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+                <a href="#" target="_blank" class="project-card fade-in" style="transition-delay: 0.6s;">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-weight: 600;">coming soon as possible</h3>
+                        <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">to be continued...</p>
+                    </div>
+                    <span>View Design →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificates">
+        <div class="certificates-wrapper fade-in">
+            <h2 style="font-size: 2rem; font-weight: bold;">Certificates</h2>
+            <div class="certificate-grid">
+                <div class="certificate-card fade-in">
+                    <h3>Python</h3>
+                    <p class="coming-soon">Coming soon</p>
+                    <a href="#" target="_self" tabindex="-1" aria-disabled="true">View Certificate →</a>
+                </div>
+                <div class="certificate-card fade-in" style="transition-delay: 0.2s;">
+                    <h3>Responsive Web Design</h3>
+                    <p class="coming-soon">Coming soon</p>
+                    <a href="#" target="_blank" tabindex="-1" aria-disabled="true">View Certificate →</a>
+                </div>
+                <div class="certificate-card fade-in" style="transition-delay: 0.4s;">
+                    <h3>UI/UX Design</h3>
+                    <a href="/New_folder/ui_certificates.html" target="_blank">View Certificate →</a>
+                </div>
+                <div class="certificate-card fade-in" style="transition-delay: 0.6s;">
+                    <h3>Knowledge Beyond Boundaries</h3>
+                    <p>Others</p>
+                    <a href="certificate_beyond.html" target="_blank">View Certificate →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact" class="fade-in">
+        <h2>Contact Me</h2>
+        <p style="margin-bottom: 1rem; color: #ccc;">Let's connect! Reach out through any platform below.</p>
+        <div style="font-size: 2rem; display: flex; justify-content: center; gap: 2rem;">
+            <a href="https://github.com/tharshanr81" class="contact1" target="_blank" title="GitHub"
+                style="color: #a855f7; text-decoration: none;">
+                <i class="fab fa-github"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/tharshanr81/" class="contact2" target="_blank" title="LinkedIn"
+                style="color: #a855f7; text-decoration: none;">
+                <i class="fab fa-linkedin"></i>
+            </a>
+
+            <a href="mailto:t4469860@gmail.com" class="contact3" title="Email"
+                style="color: #a855f7; text-decoration: none; font-size: 28px;">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <!-- Email Text -->
+           
+
+
+            <a href="#" class="contact1" onclick="document.getElementById('num').style.display='block'; return false;"
+                title="Show My Number" style="color: #a855f7; text-decoration: none; cursor: pointer;">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
+        <br><br><br>
+        <p id="num" class="contact1" style="display:none; color:#557ef7;">call: 8122057204</p>
+    </section>
+
+    <a href="#" style="font-size: x-large;text-decoration: none; margin-bottom: 300px; margin-left: 740px;">top</a>
+    <footer>
+
+        &copy; 2025 Tharshan R. All rights reserved.
+    </footer>
+
+    <script>
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        entry.target.classList.remove('fade-out');
+                    } else {
+
+                        entry.target.classList.remove('visible');
+                        entry.target.classList.add('fade-out');
+                    }
+                });
+            },
+            {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px",
+            }
+        );
+
+        const fadeElements = document.querySelectorAll('.fade-in');
+        fadeElements.forEach((el) => observer.observe(el));
+
+
+        function debounce(func, wait = 20, immediate = true) {
+            let timeout;
+            return function () {
+                const context = this,
+                    args = arguments;
+                const later = function () {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                const callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        }
+
+        const header = document.querySelector('header');
+
+        const handleScroll = debounce(() => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        window.addEventListener('scroll', handleScroll);
+
+        const topLink = document.querySelector('a[href="#"]');
+        if (topLink) {
+            topLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    </script>
+
+</body>
+
+</html>
