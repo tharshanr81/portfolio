@@ -104,9 +104,11 @@
             justify-content: space-between;
             max-width: 1200px;
             width: 100%;
+
             gap: 2rem;
             flex-wrap: wrap;
         }
+
 
         .hero-text {
             flex: 1;
@@ -409,6 +411,52 @@
                 /* Reduce the top/bottom and side padding on sections */
             }
         }
+
+        .hero-text p {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        #title span {
+            display: inline-block;
+            overflow: hidden;
+            height: 1.8em;
+            vertical-align: bottom;
+
+            color: blueviolet;
+        }
+
+        #title span::after {
+            content: "UI/UX Designer";
+            display: inline-block;
+            animation: swipe 6s infinite;
+        }
+
+
+        @keyframes swipe {
+            0% {
+                transform: translateX(0%);
+                opacity: 0;
+                content: "Web Developer | UI/UX Designer";
+
+
+            }
+
+            45% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            75% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(0%);
+                content: "Web Developer | UI/UX Designer";
+
+            }
+        }
     </style>
 </head>
 
@@ -429,13 +477,15 @@
     <section class="hero">
         <div class="hero-container">
             <div class="hero-image fade-in">
-                <img src="passport_size1.png" alt="Tharshan R" />
+
+                <img id="heroImg" src="passport_size1.png" alt="Tharshan R" class="hero-img">
+
+
             </div>
             <div class="hero-text">
                 <h1 class="fade-in" style="transition-delay: 0.2s;">Hi, I'm <span style="color: #a855f7">Tharshan
                         R</span></h1>
-                <p class="fade-in" style="transition-delay: 0.4s;">I'm a passionate UI/UX Designer | Web Developer |
-                    Python Developer.</p>
+                <p class="fade-in" id="title" style="transition-delay: 0.4s;">I'm a passionate <span></span> </p>
                 <button class="button fade-in" style="transition-delay: 0.6s;"
                     onclick="document.getElementById('Sample').scrollIntoView({ behavior: 'smooth' });">View My
                     Work</button>
@@ -523,7 +573,7 @@
         <div class="projects-wrapper fade-in">
             <h2 style="font-size: 2rem; font-weight: bold;">UI/UX Designs</h2>
             <div class="project-grid">
-                <a href="/ui_ux_designs/app_designs.html" target="_blank" class="project-card fade-in">
+                <a href="ui_ux_designs/app_designs.html" target="_blank" class="project-card fade-in">
                     <div>
                         <h3 style="font-size: 1.25rem; font-weight: 600;">Prototyped Designs</h3>
                         <p style="color: #ccc; font-size: 0.9rem; margin-top: 0.5rem;">A minimal and clean interface for
@@ -531,7 +581,7 @@
                     </div>
                     <span>View Design →</span>
                 </a>
-                <a href="/ui_ux_designs/tasks_intern.html" target="_blank" class="project-card fade-in"
+                <a href="ui_ux_designs/tasks_intern.html" target="_blank" class="project-card fade-in"
                     style="transition-delay: 0.2s;">
                     <div>
                         <h3 style="font-size: 1.25rem; font-weight: 600;">Intership Tasks </h3>
@@ -616,7 +666,7 @@
                 </div>
                 <div class="certificate-card fade-in" style="transition-delay: 0.4s;">
                     <h3>UI/UX Design</h3>
-                    <a href="/New_folder/ui_certificates.html" target="_blank">View Certificate →</a>
+                    <a href="New_folder/ui_certificates.html" target="_blank">View Certificate →</a>
                 </div>
                 <div class="certificate-card fade-in" style="transition-delay: 0.6s;">
                     <h3>Knowledge Beyond Boundaries</h3>
@@ -625,7 +675,7 @@
                 </div>
             </div>
         </div>
-    </section> 
+    </section>
     <section>
         <h2 id="Sample">Sample UI UX Design</h2><br><br><br><br>
         <video autoplay loop muted playsinline>
@@ -663,13 +713,13 @@
             </a>
         </div>
         <br><br><br>
-        <p id="num" class="contact1" style="display:none; color:#557ef7;">Copy: 8122057204</p>
+        <p id="num" class="contact1" style="display:none; color:#557ef7;">call: 8122057204</p>
         <h2><a href="#" style="font-size: x-large;text-decoration: none;">top</a></h2>
     </section>
 
-    
+
     <footer>
-       
+
         &copy; 2025 Tharshan R. All rights reserved.
     </footer>
 
@@ -733,9 +783,12 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         }
+
+
+
+
     </script>
 
 </body>
 
 </html>
-
