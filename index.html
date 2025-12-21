@@ -412,9 +412,11 @@
             }
         }
 
+       
         .hero-text p {
             font-size: 1.75rem;
             font-weight: 700;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         #title span {
@@ -430,6 +432,14 @@
             content: "UI/UX Designer";
             display: inline-block;
             animation: swipe 6s infinite;
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #a855f7, #60a5fa);
+            transition: width 0.4s ease;
+            border-radius: 2px;
         }
 
 
@@ -792,3 +802,4 @@
 </body>
 
 </html>
+
