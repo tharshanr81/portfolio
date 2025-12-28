@@ -153,6 +153,8 @@
             padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 0.5rem;
+            position: absolute;
+            top: 500px;
             cursor: pointer;
             transition: background 0.3s, transform 0.3s;
         }
@@ -416,6 +418,9 @@
         .hero-text p {
             font-size: 1.75rem;
             font-weight: 700;
+            position: absolute;
+            top: 360px;
+            
             transition: color 0.3s ease, transform 0.3s ease;
         }
 
@@ -427,17 +432,22 @@
 
             color: blueviolet;
         }
-
+        .hero-text p{
+            position: absolute;
+            margin-top: 30px;
+        }
         #title span::after {
             content: "UI/UX Designer";
             display: inline-block;
             animation: swipe 6s infinite;
             position: absolute;
+            /* margin-top: 15px; */
+            top: 60px;
             bottom: 5px;
             left: 0;
-            width: 100%;
+            width: 600px;
             height: 2px;
-            background: linear-gradient(90deg, #a855f7, #60a5fa);
+            /* background: linear-gradient(90deg, #a855f7, #60a5fa); */
             transition: width 0.4s ease;
             border-radius: 2px;
         }
@@ -467,6 +477,7 @@
 
             }
         }
+        
     </style>
 </head>
 
@@ -802,6 +813,5 @@
 </body>
 
 </html>
-
 
 
