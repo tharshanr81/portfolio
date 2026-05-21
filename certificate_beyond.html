@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certificates - Tharshan R</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0d0d0d;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Fade-in for header */
+    header {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeDown 1s ease;
+    }
+
+    @keyframes fadeDown {
+      from {
+        transform: translateY(-40px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+   
+    nav a {
+      margin-left: 1.5rem;
+      color: white;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #a855f7, #60a5fa);
+      transition: width 0.4s ease;
+      border-radius: 2px;
+    }
+
+    nav a:hover {
+      color: #a855f7;
+      transform: translateY(-3px);
+      text-shadow: 0 0 8px #a855f7;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+
+    h1 {
+      text-align: center;
+      margin: 2rem 0 1rem;
+      font-size: 2.5rem;
+      color: #a855f7;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .certificate-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .certificate-card {
+      background: #1f1f1f;
+      border-radius: 1rem;
+      width: 260px;
+      height: 240px;
+      padding: 1.5rem;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      text-align: left;
+      position: relative;
+      text-decoration: none;
+      color: white;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideUp 0.8s ease forwards;
+    }
+
+    /* Delay animations for cards */
+    .certificate-card:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+
+    .certificate-card:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .certificate-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+    }
+
+    .certificate-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .certificate-card p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .certificate-card span {
+      color: #60a5fa;
+      font-size: 0.85rem;
+      position: absolute;
+      bottom: 1.5rem;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .certificate-card span:hover {
+      color: #a855f7;
+      transform: translateX(5px);
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #888;
+      background: #0d0d0d;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h2>MyPortfolio</h2>
+    <nav>
+      <a href="index.html" target="_parent">← Back</a>
+    </nav>
+  </header>
+
+  <h1>Knowledge Beyond Boundaries</h1>
+
+  <div class="certificate-grid">
+    <a href="New_folder/unstop_certificates.html" target="_self" class="certificate-card">
+      <h3>Unstop Challenge</h3>
+      <p>Participation and winning certificates in Unstop challenge events.</p>
+      <span>View Certificate →</span>
+    </a>
+    <a href="New_folder/letsupgrade.html" target="_self" class="certificate-card">
+      <h3>LetsUpgrade Bootcamps</h3>
+      <p>It helps me to recall all my knowledges and some new skills also learned from this Bootcamps.</p>
+      <span>View Certificate →</span>
+    </a>
+    <a href="New_folder/workshops.html" target="_self" class="certificate-card">
+      <h3>Workshops </h3>
+      <p>Others</p>
+      <span>View Certificate →</span>
+    </a>
+  </div>
+
+</body>
+
+</html>
