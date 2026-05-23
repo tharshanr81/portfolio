@@ -235,14 +235,24 @@
         }
 
         .certificate-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.03);
             box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+            background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
         }
 
         .certificate-card h3 {
             font-size: 1.2rem;
             color: #f3f3f3;
             margin-bottom: 0.5rem;
+        }
+
+        .certificate-card:hover h3 {
+            color: var(--purple-light);
+            text-shadow: 0 0 5px var(--purple-light);
+        }
+
+        .certificate-card:hover .project-btn {
+            color: #3b82f6 !important;
         }
 
         .certificate-card p {
@@ -439,7 +449,9 @@
             }
 
             .hero-image img {
-                max-width: 280px;
+                width: 280px;
+                height: 280px;
+                object-fit: cover;
                 border-radius: 50%;
             }
 
@@ -516,7 +528,10 @@
             }
 
             .hero-image img {
-                max-width: 240px;
+                width: 230px;
+                height: 230px;
+                object-fit: cover;
+                border-radius: 50%;
             }
 
             .project-card {
@@ -556,6 +571,8 @@
 
         .button {
             margin-top: 5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
 
         }
 
@@ -829,8 +846,8 @@
 
 
     <section id="contact" class="fade-in">
-        <h2>Contact Me</h2>
-        <p style="margin-bottom: 1rem; color: #ccc;">Let's connect! Reach out through any platform below.</p>
+        <h2>Contact Me</h2> <br>
+        <p style="margin-bottom: 1rem; color: #ccc;">Let's connect! Reach out through any platform below.</p><br>
         <div style="font-size: 2rem; display: flex; justify-content: center; gap: 2rem;">
             <a href="https://github.com/tharshanr81" class="contact1" title="GitHub"
                 style="color: #a855f7; text-decoration: none;">
