@@ -13,11 +13,44 @@
             box-sizing: border-box;
         }
 
+        div a {
+            cursor: default;
+        }
+
+        nav a {
+            margin-left: 1.5rem;
+            color: white;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #a855f7, #60a5fa);
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
+
+        nav a:hover {
+            color: #a855f7;
+            transform: translateY(-3px);
+            text-shadow: 0 0 8px #a855f7;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0d0d0d;
             color: white;
-            min-height: 100vh;
         }
 
         header {
@@ -47,10 +80,11 @@
         }
 
         .certificate-grid {
-            display: flex;
-            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            justify-content: center;
             padding: 2rem;
         }
 
@@ -58,13 +92,37 @@
             text-align: center;
             text-decoration: none;
             color: inherit;
+            border-radius: 1rem;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .certificate-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .certificate-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .certificate-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .certificate-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
             border-radius: 1rem;
-            width: 420px;
-            height: 300px;
-            padding: 0.3rem;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
 
@@ -77,27 +135,22 @@
             font-size: 1rem;
             color: #ccc;
             margin-top: 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .certificate-card:hover p {
-            color: #a855f7;
-        }
-
-        footer {
-            padding: 2rem;
-            text-align: center;
-            font-size: 0.875rem;
-            color: #888;
-            background: #0d0d0d;
-            margin-top: 2rem;
         }
 
         @media (max-width: 500px) {
-            .certificate-card img {
-                width: 100%;
-                height: auto;
+            h1 {
+                font-size: 2rem;
             }
+
+            .certificate-card img {
+                height: 200px;
+            }
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: #666;
+            margin-top: 2rem;
         }
     </style>
 </head>
@@ -137,7 +190,73 @@
             </a>
             <p>Cybernaut's TechTrio C++ Course Certificate</p>
         </div>
-        
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/Ai_for_metaverse.jpg" alt="Instagram Clone Certificate">
+            </a>
+            <p>AI for Metaverse Course Certificate</p>
+        </div>
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/CC_certificate.jpg" alt="Instagram Clone Certificate">
+            </a>
+            <p>Google Cloud Associate Udemy Certification</p>
+        </div>
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/clowd computing.jpeg" alt="Instagram Clone Certificate">
+            </a>
+            <p>Google Cloud ML Udemy Certification</p>
+        </div>
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/data visuallization.jpeg" alt="Instagram Clone Certificate">
+            </a>
+            <p>Data Visualization Techniques Certification</p>
+        </div>
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/Data_Visualization.png" alt="Instagram Clone Certificate">
+            </a>
+            <p>EDA and Data Visualization Certification</p>
+        </div>
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/fundamentals of iot.jpeg" alt="Instagram Clone Certificate">
+            </a>
+            <p>Fundamentals of IoT Security Certification</p>
+        </div>
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/iot health.jpeg" alt="Instagram Clone Certificate">
+            </a>
+            <p>IoT Edge Computing & Analytics Certification</p>
+        </div>
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/iot.jpeg" alt="Instagram Clone Certificate">
+            </a>
+            <p>Introduction to IoT Certification</p>
+        </div>
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/iot_healthCare.jpg" alt="Instagram Clone Certificate">
+            </a>
+            <p>Big Data, Data Science & AI Certification</p>
+        </div>
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/Screenshot 2026-03-24 145323.png" alt="Instagram Clone Certificate">
+            </a>
+            <p>IoT Security Specialist Certification</p>
+        </div>
+        <div class="certificate-card">
+            <a href="#" target="_self">
+                <img src="./other_certifications/swarm intelligence.jpeg" alt="Instagram Clone Certificate">
+            </a>
+            <p>Artificial Intelligence Certification</p>
+        </div>
+
     </div>
 
     <footer>

@@ -13,35 +13,39 @@
             box-sizing: border-box;
         }
 
-    nav a {
-      margin-left: 1.5rem;
-      color: white;
-      text-decoration: none;
-      position: relative;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
+        div a {
+            cursor: default;
+        }
 
-    nav a::after {
-      content: "";
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0%;
-      height: 2px;
-      background: linear-gradient(90deg, #a855f7, #60a5fa);
-      transition: width 0.4s ease;
-      border-radius: 2px;
-    }
+        nav a {
+            margin-left: 1.5rem;
+            color: white;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
 
-    nav a:hover {
-      color: #a855f7;
-      transform: translateY(-3px);
-      text-shadow: 0 0 8px #a855f7;
-    }
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #a855f7, #60a5fa);
+            transition: width 0.4s ease;
+            border-radius: 2px;
+        }
 
-    nav a:hover::after {
-      width: 100%;
-    }
+        nav a:hover {
+            color: #a855f7;
+            transform: translateY(-3px);
+            text-shadow: 0 0 8px #a855f7;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -95,9 +99,17 @@
             transform: translateY(20px);
         }
 
-        .certificate-card:nth-child(1) { animation-delay: 0.2s; }
-        .certificate-card:nth-child(2) { animation-delay: 0.4s; }
-        .certificate-card:nth-child(3) { animation-delay: 0.6s; }
+        .certificate-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .certificate-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .certificate-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
 
         @keyframes fadeIn {
             to {
